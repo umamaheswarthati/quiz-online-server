@@ -30,4 +30,6 @@ public class Question {
 
     @ElementCollection
     private List<String> correctAnswers;
+
+//    private String explanation;
 }

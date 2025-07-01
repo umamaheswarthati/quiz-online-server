@@ -18,4 +18,8 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
     @Query("SELECT DISTINCT q.subject FROM Question q")
     List<String> findDistinctSubject();
     Page<Question> findBySubject(String subject, Pageable pageable);
+
+    List<Question> findBySubject(String subject);
+
+    List<Question> deleteBySubject(String subject);
 }

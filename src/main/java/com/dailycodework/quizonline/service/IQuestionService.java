@@ -27,4 +27,13 @@ public interface IQuestionService {
     List<Question> getQuestionsForUser(Integer numOfQuestions, String subject);
 
 
+    List<Question> getAllQuizQuestions(String flag);
+
+    int insertQuestions(List<Question> questions);
+
+    List<Question> getAllQuizQuestionsBySubject(String subject);
+
+    List<Question> deleteAllQuizQuestionsBySubject(String subject);
+
+    int insertQuestions(String subject, List<Question> questions);
 }

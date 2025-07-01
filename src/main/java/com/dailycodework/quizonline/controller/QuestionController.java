@@ -5,7 +5,6 @@ import com.dailycodework.quizonline.service.IQuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,4 +79,40 @@ public class QuestionController {
         return ResponseEntity.ok(randomQuestions);
     }
 
+    @GetMapping("/v2/questions")
+    public ResponseEntity<List<Question>> getAllQuestionsV2() {
+        List<Question> questions = questionService.getAllQuizQuestions(null);
+        return ResponseEntity.ok(questions);
+    }
+
+    @GetMapping("/v2/questions/{operation}")
+    public ResponseEntity<List<Question>> getAllQuestions(@PathVariable String operation) {
+        List<Question> questions = questionService.getAllQuizQuestions(operation);
+        return ResponseEntity.ok(questions);
+    }
+
+
+    @GetMapping("/v2/questions/{subject}")
+    public ResponseEntity<List<Question>> getAllQuestionsBySubject(@PathVariable String subject) {
+        List<Question> questions = questionService.getAllQuizQuestionsBySubject(subject);
+        return ResponseEntity.ok(questions);
+    }
+
+    @PostMapping("/v2/questions/bulk/insert")
+    public ResponseEntity<String> insertBulkQuestions(@RequestBody List<Question> questions) {
+        int records = questionService.insertQuestions(questions);
+        return ResponseEntity.ok("Questions inserted successfully. Total records inserted: " + records + ".");
+    }
+
+    @GetMapping("/v2/questions/delete/{subject}")
+    public ResponseEntity<List<Question>> deleteAllQuestionsBySubject(@PathVariable String subject) {
+        List<Question> questions = questionService.deleteAllQuizQuestionsBySubject(subject);
+        return ResponseEntity.ok(questions);
+    }
+
+    @PostMapping("/v2/questions/bulk/insert/{subject}")
+    public ResponseEntity<String> insertBulkQuestions(@PathVariable String subject, @RequestBody List<Question> questions) {
+        int records = questionService.insertQuestions(subject, questions);
+        return ResponseEntity.ok("Questions inserted successfully. Total records inserted: " + records + ".");
+    }
 }
