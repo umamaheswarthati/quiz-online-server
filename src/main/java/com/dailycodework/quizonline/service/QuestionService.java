@@ -96,7 +96,7 @@ public class QuestionService implements IQuestionService{
             throw new IllegalArgumentException("Question list cannot be null or empty");
         }
         //questionRepository.deleteAll();
-        List<Question> questionEntities = quizTransformer.transformRequestToEntity(subject, questions);
-        return questionRepository.saveAll(questionEntities).size();
+        //List<Question> questionEntities = quizTransformer.transformRequestToEntity(subject, questions);
+        return questionRepository.saveAll(questions).size();
     }
 }

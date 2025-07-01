@@ -11,6 +11,9 @@ import java.util.List;
 public class QuizTransformer {
     public Question transformResponse(Question question, String operation) {
         Question dto = new Question();
+        dto.setId(question.getId());
+        dto.setSubject(question.getSubject());
+        dto.setQuestionType(question.getQuestionType());
         dto.setQuestion(question.getQuestion());
         dto.setChoices(question.getChoices());
         // Manually assemble the options list from individual columns
@@ -43,6 +46,7 @@ public class QuizTransformer {
     public List<Question> transformRequestToEntity(String subject, List<Question> questionRequests) {
         return questionRequests.stream().map(questionRequest -> {
             Question question = new Question();
+            question.setQuestionType(question.getQuestionType());
             question.setSubject(subject);
             question.setQuestion(questionRequest.getQuestion());
             question.setChoices(questionRequest.getChoices());

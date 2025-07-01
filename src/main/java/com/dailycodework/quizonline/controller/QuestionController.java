@@ -92,7 +92,7 @@ public class QuestionController {
     }
 
 
-    @GetMapping("/v2/questions/{subject}")
+    @GetMapping("/v2/questions/subject/{subject}")
     public ResponseEntity<List<Question>> getAllQuestionsBySubject(@PathVariable String subject) {
         List<Question> questions = questionService.getAllQuizQuestionsBySubject(subject);
         return ResponseEntity.ok(questions);
@@ -110,7 +110,7 @@ public class QuestionController {
         return ResponseEntity.ok(questions);
     }
 
-    @PostMapping("/v2/questions/bulk/insert/{subject}")
+    @PostMapping("/v2/questions/bulk/insert/subject/{subject}")
     public ResponseEntity<String> insertBulkQuestions(@PathVariable String subject, @RequestBody List<Question> questions) {
         int records = questionService.insertQuestions(subject, questions);
         return ResponseEntity.ok("Questions inserted successfully. Total records inserted: " + records + ".");
